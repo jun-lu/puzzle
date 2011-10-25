@@ -1,6 +1,6 @@
 	
 	//一个puzz类
-	var Puzz = function(index, width, height, size, wrap, url, isEnd){//顺序 宽度，高度，比例，父容器，url, 是否是最后一个元素
+	var Puzz = function(index, width, height, size, wrap, url){//顺序 宽度，高度，比例，父容器，url, 是否是最后一个元素
 		this.ele = null;
 		this.left = 0;
 		this.top = 0;
@@ -85,7 +85,7 @@
 	});
 	
 	
-	var Puzzie = function(id, width, height, url, size){//容器ID，宽度，高度，图片url, 拆分模块数量
+	var Puzzie = function(id, width, height, url, size, isNunber){//容器ID，宽度，高度，图片url, 拆分模块数量
 		var dom = Jun.dom;
 		this.dom = dom;
 		this.ele = dom.$(id);
@@ -95,6 +95,7 @@
 		this.size = size;
 		this.itemList = [];//全部item
 		this.listOrder = [];//顺序 多维
+		this.isNunber = isNunber ===  undefined ? true : false;
 		this.init();
 	};
 	Jun.mix(Puzzie.prototype, {
@@ -112,10 +113,10 @@
 			var url = '';
 			for(var i=0, len = this.size * this.size; i<len; i++){
 				url = end =(i+1 == len ? false : this.url);
-				item = new Puzz(i, this.itemWidth, this.itemHeight, this.size, this.ele, url);//new 新的item
+				item = new Puzz(i, this.itemWidth, this.itemHeight, this.size, this.ele, url, this.isNunber);//new 新的item
 				item.init();
 				
-				if(end){//最后一个键位不显示数字
+				if(this.isNunber === true && end){//最后一个键位不显示数字
 					item.setShowInt();
 				}
 				
@@ -180,6 +181,12 @@
 		},
 		shuffle:function(){//洗牌
 		
+			if(this.itemList.length == 0){
+				this.init();
+				this.start();
+				return ;
+			}
+			
 			var order = [];//位置序列
 			
 			for(var i=0; i<this.size * this.size; i++){
@@ -218,6 +225,7 @@
 			return okay;
 		},
 		success:function(){//完成
+			this.itemList = [];
 			this.ele.innerHTML = '';
 		},
 		keyMove:function(index){
