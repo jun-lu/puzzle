@@ -1,6 +1,6 @@
 	
 	//一个puzz类
-	var Puzz = function(index, width, height, size, wrap, url){//顺序 宽度，高度，比例，父容器，url, 是否是最后一个元素
+	var Puzz = function(index, width, height, size, wrap, url, end){//顺序 宽度，高度，比例，父容器，url, 是否是最后一个元素
 		this.ele = null;
 		this.left = 0;
 		this.top = 0;
@@ -10,7 +10,7 @@
 		this.size = size;
 		this.wrap = wrap;
 		this.url = url;
-		this.end = url === false ? true : false;//标识是否最后一个
+		this.end = end;//标识是否最后一个
 		this.index = index + 1;
 		this.x = 0;
 		this.y = 0;
@@ -48,10 +48,9 @@
 			var lie = parseInt((this.index-1)/this.size);
 			var row = parseInt((this.index-1)%this.size);
 			
-			if(this.url){
+			if(this.url && this.end == false){
 				this.setShowBackground("url("+ this.url +") no-repeat -"+(row*this.width)+"px -"+(lie*this.height)+"px");	
 			}else{
-				this.end = true;
 				this.setShowBackground(this.defaultBackground);
 			}
 
@@ -85,7 +84,7 @@
 	});
 	
 	
-	var Puzzie = function(id, width, height, url, size, isNunber){//容器ID，宽度，高度，图片url, 拆分模块数量
+	var Puzzie = function(id, width, height, url, size, isNunber){//容器ID，宽度，高度，图片url, 拆分模块数量, 是否拼数字
 		var dom = Jun.dom;
 		this.dom = dom;
 		this.ele = dom.$(id);
@@ -112,11 +111,11 @@
 			var end = false;
 			var url = '';
 			for(var i=0, len = this.size * this.size; i<len; i++){
-				url = end =(i+1 == len ? false : this.url);
-				item = new Puzz(i, this.itemWidth, this.itemHeight, this.size, this.ele, url, this.isNunber);//new 新的item
+				end =(i+1 == len ? true : false);
+				item = new Puzz(i, this.itemWidth, this.itemHeight, this.size, this.ele, this.url, end);//new 新的item
 				item.init();
-				
-				if(this.isNunber === true && end){//最后一个键位不显示数字
+	
+				if(this.isNunber == true && end == false){
 					item.setShowInt();
 				}
 				
@@ -246,6 +245,25 @@
 			}
 		}
 	});
+	
+	var PuzzTest = {// 测试api
+		order1:[0,1,2,3,4,5,7,6,8],
+		shuffleOrder:function(order){//按照order的顺序来刷新
+			var size = this.size;
+			var listOrder = this.listOrder = [];
+			var itemList = this.itemList;
+			
+			for(i=0; i<size ; i++){//矩阵
+				listOrder.push(order.slice(i*size, (i+1)*size));
+			};
+			var list = this.itemList;
+			for(i=0,len=listOrder.length; i<len; i++){
+				for(var j=0; j<listOrder[i].length; j++){
+					itemList[listOrder[i][j]].move(j, i);
+				}
+			};
+		}	
+	};
 	
 	
 	
