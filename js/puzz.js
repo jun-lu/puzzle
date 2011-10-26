@@ -95,7 +95,7 @@
 		this.size = size;
 		this.itemList = [];//全部item
 		this.listOrder = [];//顺序 多维
-		this.isNunber = isNunber ===  undefined ? true : false;
+		this.isNunber = isNunber != false ? true : false;//undefined 
 		this.init();
 	};
 	Jun.mix(Puzzie.prototype, {
