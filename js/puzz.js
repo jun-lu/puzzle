@@ -159,7 +159,7 @@
 				order[x][y-1] = j;
 			}
 			
-			
+			//this.solvability();
 			if(this.isOkay()){
 				this.success();
 			};
@@ -191,10 +191,13 @@
 			for(var i=0; i<this.size * this.size; i++){
 				order.push(i);
 			};
-
+			
 			order = this.sort(order);
-			order = this.sort(order);
-			order = this.sort(order);
+			
+			while( ! this.solvability(order.slice(0), this.size) ){//判断当前序列是否能还原
+				order = this.sort(order);
+			}
+			
 				
 			var size = this.size;
 			var listOrder = this.listOrder = [];
@@ -211,7 +214,36 @@
 			};
 
 		},
-		
+		solvability:function(order, size){//判断当前的拼图是否可以还原
+			// 定理1：图形A与图形B等价的充要条件图形A的排列的逆序数加上0元素行号和列号的奇偶性等于图形B的排列的逆序数加上0元素行号和列号的奇偶性。为方便表述，把图形排列的逆序数加上0元素行号和列号的奇偶性称为图形的奇偶性。
+			var a;
+			var count = 0;
+			var m = 0;
+			var n = 0;
+			
+			var len = order.length;
+			size = size || 3;
+			//[0,1,2,3,4,5,7,6,8]
+			for(var i=0; i<len; i++){
+				var a = order[i];
+				
+				if(a == 8){
+					m = parseInt(i/size);
+					n = parseInt(i%size);
+				}
+					
+				for(var j=i+1; j<len; j++){
+					
+					if(order[j]<a){
+						count++;
+					}
+				}
+			}
+			console.log(count);
+			count += m;
+			count += n;
+			return count%2 == 0;
+		},
 		isOkay:function(){
 			var okay = true;
 			var list = this.itemList;
