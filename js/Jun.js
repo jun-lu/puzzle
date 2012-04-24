@@ -7,10 +7,8 @@
  *  Jun.animate dom变快
  *  Jun.com 其他组件
  */
- 
-;(function(win, name, undef){
-	
-	win[name] = {};
+define(function(require, exports, model){
+
 	
 	var mix = function(a, b){
 		for(var i in b){
@@ -27,7 +25,6 @@
 		isIE6:false
 	}
 	
-	mix(win[name], {"mix":mix, 'log':log, 'B':B});
+	mix(exports, {"mix":mix, 'log':log, 'B':B});
 	
-	
-})(window, 'Jun', undefined)
+}); 

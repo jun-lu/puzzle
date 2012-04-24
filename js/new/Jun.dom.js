@@ -4,11 +4,9 @@
  * 2011-02-08 20:42
  */
  
- define(function(require, exports, model){
+ ;(function(){
 
-    var Jun = require('Jun');
-    
-    return {
+	 Jun.dom = {
 		
 		/* query */
 		
@@ -31,17 +29,26 @@
 		
 		
 		/* DOM Three find*/
-		first:function(elem){
+		first:function(element){
 			//elem = getElem(elem, this);
-			var first = elem.firstElementChild;//高级浏览器
+			var first = element.firstElementChild;//高级浏览器
 			if(first || first === null){
 				return first;
 			}
-			first = elem.firstChild;//ie6 7 8
-			if(first ===null || this.isElement(first)){
-				return first;
+			
+			// first = elem.firstChild;//ie6 7 8
+			// if(first ===null || this.isElement(first)){
+				// return first;
+			// }
+			// return this.next(first);
+			
+			element = element.firstChild;
+			
+			while(element != null && !this.isElement(element)){
+				element = element.nextSibling;
 			}
-			return this.next(first);
+			
+			return element;
 			//return elem.firstElementChild;//.firstChild;
 			
 		},
@@ -64,6 +71,7 @@
 		},
 		
 		parent:function(elem){
+			//return elem.parentElement; ie 非标准
 			return elem.parentNode;//对于已经删除的元素 标准返回null，IE6返回的祖先元素为 document-fragment
 		},
 		
@@ -201,10 +209,33 @@
 				elem.style[style] = parseFloat(tween.eain(t, b, val, time));// + px;
 			}, 10);
 			return a;
+		},
+		on:function(element, type, fn){
+			if(element.addEventListener){
+				element.addEventListener(type, fn, false);
+			}else if(element.attachEvent){
+				element.attachEvent("on"+type, fn);// this会指向window
+			}else{
+				element["on"+type] = fn;
+			};
+			return element;
+		},
+		off:function(element, type, fn){
+			if(element.removeEventListener){
+				element.removeEventListener(type, fn, false);
+			}else if(element.detachEvent){
+				element.detachEvent("on"+type, fn);
+			}else{
+				element["on"+type] = null;
+			};
+			return element;
 		}
 	 };
-
+	 
+	 
 	 var tween = {
 	 	eain:function(t, b, c, d){ return - c * (t /= d) * (t - 2) + b}
 	 }
- });
+ 	
+  })();
+ 
