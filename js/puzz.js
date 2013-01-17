@@ -239,7 +239,7 @@
 					}
 				}
 			}
-			console.log(count);
+			//console.log(count);
 			count += m;
 			count += n;
 			return count%2 == 0;
