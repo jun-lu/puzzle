@@ -1,15 +1,19 @@
+在网页中构建数字拼图游戏
+
 # Installation
 
-```
+```shell
 npm install web-game-puzzle
 ```
 
 # use
 
+```html
+<div style="width:300px;height:300px;" id="puzzle"></div>
 ```
-// <div style="width:300px;height:300px;" id="puzzle" ></div>
-import Puzzle from "web-game-puzzle";
 
+```javascript
+import Puzzle from "web-game-puzzle";
 const game = new Puzzle(
   document.getElementById("puzzle"),
   3,
@@ -17,7 +21,6 @@ const game = new Puzzle(
   true
 );
 game.start();
-
 ```
 
 # demo
