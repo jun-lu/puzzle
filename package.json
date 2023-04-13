@@ -1,5 +1,5 @@
 {
-  "name": "puzzle",
+  "name": "web-game-puzzle",
   "version": "1.0.0",
   "description": "",
   "main": "./puzzle.js",
