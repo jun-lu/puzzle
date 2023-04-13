@@ -1,0 +1,17 @@
+{
+  "name": "puzzle",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./puzzle.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jun-lu/puzzle.git"
+  },
+  "author": "jun-lu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jun-lu/puzzle/issues"
+  },
+  "homepage": "https://github.com/jun-lu/puzzle#readme"
+}

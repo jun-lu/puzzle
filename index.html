@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>Hello Puzzle</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<style rel="stylesheet">
+		.puzzle {
+			width: 210px;
+			height: 210px;
+			position: relative;
+			box-shadow: 0 1px 10px #ccc;
+			border-radius: 5px;
+		}
+
+		.puzzle-in {
+			position: relative;
+			margin: 1%;
+			height: 99%;
+			width: 99%
+		}
+
+		.puzz-item {
+			position: absolute;
+			width: 70px;
+			height: 70px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			color: #000;
+			font-size: 24px;
+		}
+	</style>
+	<script type="module" src="./index.js"></script>
+</head>
+
+<body>
+	<div class="container-fluid">
+		<div class="content">
+			<div class="row">
+				<div class="span5">
+					<!-- <h2>3*3 210 拼数字</h2> -->
+					<div class="puzzle" id="puzzle"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
