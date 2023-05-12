@@ -25,7 +25,7 @@ game.start();
 
 # demo
 
-[https://fixify.store/games/puzzle](https://fixify.store/games/puzzle)
+[https://fixify.store/games/puzzle/](https://fixify.store/games/puzzle/)
 
 # API
 
