@@ -5,7 +5,6 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>Hello Puzzle</title>
-  <link rel="stylesheet" href="css/bootstrap.min.css">
   <style rel="stylesheet">
     .puzzle {
       width: 210px;
@@ -33,19 +32,44 @@
       color: #000;
       font-size: 24px;
     }
+
+    pre {
+      background-color: #f3f3f3;
+      padding: 10px;
+    }
   </style>
   <script type="module" src="./index.js"></script>
 </head>
 
 <body>
-  <div class="container-fluid">
-    <div class="content">
-      <div class="row">
-        <div class="span5">
-          <!-- <h2>3*3 210 拼数字</h2> -->
-          <div class="puzzle" id="puzzle"></div>
-        </div>
-      </div>
+  <div>
+    <div>
+      <h2>3*3</h2>
+      <div class="puzzle" id="puzzle"></div>
+      <pre>
+import Puzzle from "./puzzle.js";
+var game = new Puzzle(
+  document.getElementById("puzzle"),
+  3,
+  "https://img.alicdn.com/imgextra/i4/O1CN01eC3Z3t1DR8nRi2guC_!!6000000000212-0-tps-300-300.jpg",
+  true
+);
+game.start();
+      </pre>
+    </div>
+    <div>
+      <h2>4*4</h2>
+      <div class="puzzle" id="puzzle2" style="width:300px;height:300px;"></div>
+      <pre>
+import Puzzle from "./puzzle.js";
+var game = new Puzzle(
+  document.getElementById("puzzle"),
+  4,
+  "https://img.alicdn.com/imgextra/i4/O1CN01eC3Z3t1DR8nRi2guC_!!6000000000212-0-tps-300-300.jpg",
+  true
+);
+game.start();
+              </pre>
     </div>
   </div>
 </body>
